@@ -1,0 +1,54 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block stylesheets %}
+    <link href="{% static 'lib/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet" />
+{% endblock stylesheets%}
+
+{% block titulo %} {{ title }} {% endblock titulo %}
+
+{% block content %}
+    <div class="container-fluid mt--7">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card shadow">
+              <div class="card-header border-0">
+                <h3 class="mb-0">{{title}}</h3>
+              </div>
+              <div class="card-body table-responsive">
+                <table data-order='[[ 0, "asc" ]]' data-page-length='10' id="table" class="table table-bordered align-items-center table-flush" width="100%" cellspacing="0">
+                    <thead class="thead-light">
+                         {% block columns %}
+                         {% endblock %}
+                    </thead>
+                    <tbody>
+                         {% block rows %}
+                         {% endblock %}
+                    </tbody>
+                </table>
+              </div>
+              <div class="card-footer ">
+                <div class="stats float-right">
+                    {% block buttons_list %}
+                        <a href="{{ create_url }}" id = "btnTest" class="btn btn-primary">
+                            <i class="fas fa-plus text-white"></i> Nuevo registro
+                        </a>
+                        <a onclick="{{ list_url }}" id = "reload" class="btn btn-success text-white">
+                            <i class="fas fa-sync text-white"></i> Refrescar
+                        </a>
+                    {% endblock buttons_list %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    {% include 'includes/footer.html' %}
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    <script src="{% static 'lib/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'lib/datatables/dataTables.bootstrap4.min.js' %}"></script>
+{% endblock javascripts %}
+
